@@ -1,4 +1,4 @@
-e<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -15,8 +15,36 @@ e<!DOCTYPE html>
             margin: 0 auto;
             background-color: white;
             padding: 30px;
-            border-radius: 10px
+            border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .instruction-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .instruction-text {
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: left;
+            line-height: 1.6;
+        }
+        .start-button {
+            padding: 10px 30px;
+            font-size: 1.1em;
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .start-button:hover {
+            background-color: #0b5ed7;
+        }
+        .survey-content {
+            display: none;
         }
         .question {
             margin-bottom: 30px;
@@ -110,476 +138,497 @@ e<!DOCTYPE html>
 </head>
 <body>
     <div class="survey-container">
-        <h1 class="text-center mb-4">我们如何吵架？</h1>
-        <h4 class="text-center mb-4">一份关于恋爱中冲突方式的小测试</h4>
-        
-        <div class="intro-text">
-            <p>亲爱的同学，您好！</p>
-            <p>本问卷旨在了解您在亲密关系中的冲突处理方式。答案无对错之分，请根据您的真实情况作答。</p>
-            <p>所有数据仅用于学术研究，绝对保密。感谢您的参与！</p>
+        <div id="instructionSection" class="instruction-container">
+            <h1 class="text-center mb-4">我们如何吵架？</h1>
+            <h4 class="text-center mb-4">一份关于恋爱中冲突方式的小测试</h4>
+            
+            <div class="instruction-text">
+                <p>您好！非常感谢您参与本测试。</p>
+                <p>本测试旨在帮助人们了解在亲密关系（例如恋爱关系、婚姻关系）中处理冲突的方式和倾向。</p>
+                <p>问卷包含一系列描述人们在亲密关系中可能的行为或感受的语句。请仔细阅读每一道题目。回想您在最近一段（或当前）重要的亲密关系中，遇到分歧或冲突时的实际感受和行为。答案没有对错之分，请根据您的第一反应和真实情况作答。</p>
+                <p>根据该描述与您实际情况的符合程度，在每题后面评分：</p>
+                <p>1 = 很不符合；2 = 不符合；3 = 一般；4 = 符合；5 = 很符合。</p>
+                <p>完成本测试大约需要 2-5分钟。</p>
+            </div>
+            
+            <button id="startButton" class="start-button">我已知晓</button>
         </div>
 
-        <form id="surveyForm">
-            <h3 class="section-title">基本信息</h3>
-            
-            <div class="question">
-                <div class="question-title">1. 你的性别：<span class="required">*</span></div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gender" id="gender1" required>
-                    <label class="form-check-label" for="gender1">男</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gender" id="gender2">
-                    <label class="form-check-label" for="gender2">女</label>
-                </div>
+        <div id="surveyContent" class="survey-content">
+            <div class="intro-text">
+                <p>亲爱的同学，您好！</p>
+                <p>本问卷旨在了解您在亲密关系中的冲突处理方式。答案无对错之分，请根据您的真实情况作答。</p>
+                <p>所有数据仅用于学术研究，绝对保密。感谢您的参与！</p>
             </div>
 
-            <div class="question">
-                <div class="question-title">2. 你的年级：<span class="required">*</span></div>
-                <select class="form-select" name="grade" required>
-                    <option value="">请选择</option>
-                    <option value="1">大一</option>
-                    <option value="2">大二</option>
-                    <option value="3">大三</option>
-                    <option value="4">大四</option>
-                    <option value="5">研究生</option>
-                    <option value="6">博士生</option>
-                </select>
-            </div>
-
-            <div class="question" id="in_relationship_question">
-                <div class="question-title">3. 你当下是否处在亲密关系中：<span class="required">*</span></div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="in_relationship" id="in_relationship1" value="yes" required>
-                    <label class="form-check-label" for="in_relationship1">是</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="in_relationship" id="in_relationship2" value="no">
-                    <label class="form-check-label" for="in_relationship2">否</label>
-                </div>
-            </div>
-
-            <div class="question" id="had_relationship_question" style="display: none;">
-                <div class="question-title">4. 你是否曾经有过亲密关系：<span class="required">*</span></div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="had_relationship" id="had_relationship1" value="yes">
-                    <label class="form-check-label" for="had_relationship1">是</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="had_relationship" id="had_relationship2" value="no">
-                    <label class="form-check-label" for="had_relationship2">否</label>
-                </div>
-            </div>
-
-            <div id="relationship_questions" style="display: none;">
+            <form id="surveyForm">
+                <h3 class="section-title">基本信息</h3>
+                
                 <div class="question">
-                    <div class="question-title">5. 你的恋爱次数：<span class="required">*</span></div>
-                    <input type="number" class="form-control" name="relationship_count" min="0" required>
-                </div>
-
-                <div class="question">
-                    <div class="question-title">6. 你的恋爱维持时间最长是：<span class="required">*</span></div>
-                    <input type="text" class="form-control" name="longest_relationship" placeholder="例如：2年3个月" required>
-                </div>
-
-                <div class="question">
-                    <div class="question-title">7. 是否经历过异地：<span class="required">*</span></div>
+                    <div class="question-title">1. 你的性别：<span class="required">*</span></div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="long_distance" id="long_distance1" value="yes" required>
-                        <label class="form-check-label" for="long_distance1">是</label>
+                        <input class="form-check-input" type="radio" name="gender" id="gender1" required>
+                        <label class="form-check-label" for="gender1">男</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="long_distance" id="long_distance2" value="no">
-                        <label class="form-check-label" for="long_distance2">否</label>
+                        <input class="form-check-input" type="radio" name="gender" id="gender2">
+                        <label class="form-check-label" for="gender2">女</label>
                     </div>
                 </div>
 
                 <div class="question">
-                    <div class="question-title">8. 你们发生冲突的频率是：<span class="required">*</span></div>
-                    <input type="text" class="form-control" name="conflict_frequency" placeholder="例如：一周一次" required>
+                    <div class="question-title">2. 你的年级：<span class="required">*</span></div>
+                    <select class="form-select" name="grade" required>
+                        <option value="">请选择</option>
+                        <option value="1">大一</option>
+                        <option value="2">大二</option>
+                        <option value="3">大三</option>
+                        <option value="4">大四</option>
+                        <option value="5">研究生</option>
+                        <option value="6">博士生</option>
+                    </select>
                 </div>
-            </div>
 
-            <div class="scale-description">
-                <h5>作答说明</h5>
-                <p>请根据您的实际情况选择最符合的一项：</p>
-                <p>1 = 从不，2 = 偶尔，3 = 有时，4 = 经常，5 = 总是</p>
-            </div>
-
-            <h3 class="section-title">冲突前阶段</h3>
-            
-            <div class="question">
-                <div class="question-title">9. 当我注意到伴侣的某些行为（如长时间打游戏、熬夜）可能会引发我们的矛盾时，我会主动和TA商量是否可以一起制定新的相处规则。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q9" id="q9" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="question" id="in_relationship_question">
+                    <div class="question-title">3. 你当下是否处在亲密关系中：<span class="required">*</span></div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="in_relationship" id="in_relationship1" value="yes" required>
+                        <label class="form-check-label" for="in_relationship1">是</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="in_relationship" id="in_relationship2" value="no">
+                        <label class="form-check-label" for="in_relationship2">否</label>
                     </div>
                 </div>
-            </div>
 
-            <div class="question" id="q10_container" style="display: none;">
-                <div class="question-title">10. 在异地期间，我会提前和伴侣沟通联系时间，尽量避免因为联系不及时而产生误会或不快。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q10" id="q10" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="question" id="had_relationship_question" style="display: none;">
+                    <div class="question-title">4. 你是否曾经有过亲密关系：<span class="required">*</span></div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="had_relationship" id="had_relationship1" value="yes">
+                        <label class="form-check-label" for="had_relationship1">是</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="had_relationship" id="had_relationship2" value="no">
+                        <label class="form-check-label" for="had_relationship2">否</label>
                     </div>
                 </div>
-            </div>
 
-            <div class="question">
-                <div class="question-title">11. 即使我对伴侣有需求（例如更多陪伴），我也不会说出来，以避免可能的争执。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q11" id="q11" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div id="relationship_questions" style="display: none;">
+                    <div class="question">
+                        <div class="question-title">5. 你的恋爱次数：<span class="required">*</span></div>
+                        <input type="number" class="form-control" name="relationship_count" min="0" required>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-title">6. 你的恋爱维持时间最长是：<span class="required">*</span></div>
+                        <input type="text" class="form-control" name="longest_relationship" placeholder="例如：2年3个月" required>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-title">7. 是否经历过异地：<span class="required">*</span></div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="long_distance" id="long_distance1" value="yes" required>
+                            <label class="form-check-label" for="long_distance1">是</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="long_distance" id="long_distance2" value="no">
+                            <label class="form-check-label" for="long_distance2">否</label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-title">8. 你们发生冲突的频率是：<span class="required">*</span></div>
+                        <input type="text" class="form-control" name="conflict_frequency" placeholder="例如：一周一次" required>
                     </div>
                 </div>
-            </div>
 
-            <div class="question">
-                <div class="question-title">12. 如果我感到伴侣忽略了我，我并不会表达出来这种感受，而是表现得和平常一样。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q12" id="q12" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="scale-description">
+                    <h5>作答说明</h5>
+                    <p>请根据您的实际情况选择最符合的一项：</p>
+                    <p>1 = 从不，2 = 偶尔，3 = 有时，4 = 经常，5 = 总是</p>
+                </div>
+
+                <h3 class="section-title">冲突前阶段</h3>
+                
+                <div class="question">
+                    <div class="question-title">9. 当我注意到伴侣的某些行为（如长时间打游戏、熬夜）可能会引发我们的矛盾时，我会主动和TA商量是否可以一起制定新的相处规则。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q9" id="q9" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="question">
-                <div class="question-title">13. 当我察觉到伴侣心情不好，我会避免谈及可能引起争议的话题（比如家务或约会安排）。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q13" id="q13" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="question" id="q10_container" style="display: none;">
+                    <div class="question-title">10. 在异地期间，我会提前和伴侣沟通联系时间，尽量避免因为联系不及时而产生误会或不快。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q10" id="q10" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="question" id="q14_container" style="display: none;">
-                <div class="question-title">14. 异地时，如果对方很久没有回复消息，我通常不会主动问发生了什么。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q14" id="q14" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="question">
+                    <div class="question-title">11. 即使我对伴侣有需求（例如更多陪伴），我也不会说出来，以避免可能的争执。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q11" id="q11" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="question">
-                <div class="question-title">15. 当我做出的决定被伴侣质疑时，我会极力说服对方接受我的观点，认为我的方案才是最优的。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q15" id="q15" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="question">
+                    <div class="question-title">12. 如果我感到伴侣忽略了我，我并不会表达出来这种感受，而是表现得和平常一样。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q12" id="q12" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="question">
-                <div class="question-title">16. 如果我感到伴侣的行为（如与异性互动密切）可能损害我的利益或感受，我会明确要求对方按照我的期望做出改变（比如断绝和异性的接触）。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q16" id="q16" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="question">
+                    <div class="question-title">13. 当我察觉到伴侣心情不好，我会避免谈及可能引起争议的话题（比如家务或约会安排）。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q13" id="q13" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <h3 class="section-title">冲突中阶段</h3>
-
-            <div class="question">
-                <div class="question-title">17. 当争执升级、伴侣情绪激动时，我会先安抚对方，尝试让对话平静下来，避免情绪过分激动伤害到彼此。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q17" id="q17" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="question" id="q14_container" style="display: none;">
+                    <div class="question-title">14. 异地时，如果对方很久没有回复消息，我通常不会主动问发生了什么。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q14" id="q14" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="question">
-                <div class="question-title">18. 如果我们对一件事情有不同看法而无法达成一致，我会建议我们各自表达想法，再一起找一个都能接受的方案。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q18" id="q18" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="question">
+                    <div class="question-title">15. 当我做出的决定被伴侣质疑时，我会极力说服对方接受我的观点，认为我的方案才是最优的。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q15" id="q15" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="question">
-                <div class="question-title">19. 如果伴侣在朋友面前指出我的问题，我会沉默接受以维护TA的面子。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q19" id="q19" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="question">
+                    <div class="question-title">16. 如果我感到伴侣的行为（如与异性互动密切）可能损害我的利益或感受，我会明确要求对方按照我的期望做出改变（比如断绝和异性的接触）。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q16" id="q16" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="question">
-                <div class="question-title">20. 在意见不合的时候，即使我并不认同对方，我也常常选择让步，以尽快结束争论。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q20" id="q20" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <h3 class="section-title">冲突中阶段</h3>
+
+                <div class="question">
+                    <div class="question-title">17. 当争执升级、伴侣情绪激动时，我会先安抚对方，尝试让对话平静下来，避免情绪过分激动伤害到彼此。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q17" id="q17" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="question">
-                <div class="question-title">21. 当争吵愈演愈烈时，我会突然转移话题或去做别的事，希望这件事情就这样过去。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q21" id="q21" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="question">
+                    <div class="question-title">18. 如果我们对一件事情有不同看法而无法达成一致，我会建议我们各自表达想法，再一起找一个都能接受的方案。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q18" id="q18" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="question">
-                <div class="question-title">22. 当伴侣追问我真实的想法时，我常常回答得含糊其辞（如“我都可以”），避免继续深入讨论。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q22" id="q22" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="question">
+                    <div class="question-title">19. 如果伴侣在朋友面前指出我的问题，我会沉默接受以维护TA的面子。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q19" id="q19" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="question">
-                <div class="question-title">23.当双方争执不下时，我会更坚定地维护自己的立场，并试图通过讲道理或施压让对方妥协让步。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q23" id="q23" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="question">
+                    <div class="question-title">20. 在意见不合的时候，即使我并不认同对方，我也常常选择让步，以尽快结束争论。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q20" id="q20" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="question">
-                <div class="question-title">24. 如果伴侣不同意我的观点，我会持续争论并施加影响（如强调后果、坚持己见），直到对方表现出让步或接受我的方案。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q24" id="q24" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="question">
+                    <div class="question-title">21. 当争吵愈演愈烈时，我会突然转移话题或去做别的事，希望这件事就这样过去。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q21" id="q21" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <h3 class="section-title">冲突后阶段</h3>
-
-            <div class="question">
-                <div class="question-title">25. 冲突结束后，我会主动提出一起回顾这次矛盾，并思考是否可以改善我们之间的相处方式。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q25" id="q25" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="question">
+                    <div class="question-title">22. 当伴侣追问我真实的想法时，我常常回答得含糊其辞（如"我都可以"），避免继续深入讨论。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q22" id="q22" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="question">
-                <div class="question-title">26. 即使我们已经解决了矛盾，我也会通过某些方式（如轻松的对话、约会、拥抱）来缓和可能残留的情绪。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q26" id="q26" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="question">
+                    <div class="question-title">23. 当双方争执不下时，我会更坚定地维护自己的立场，并试图通过讲道理或施压让对方妥协让步。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q23" id="q23" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="question">
-                <div class="question-title">27. 争吵后，我常常会反思是不是自己太挑剔，于是减少了对伴侣表达期待的次数。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q27" id="q27" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="question">
+                    <div class="question-title">24. 如果伴侣不同意我的观点，我会持续争论并施加影响（如强调后果、坚持己见），直到对方表现出让步或接受我的方案。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q24" id="q24" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="question">
-                <div class="question-title">28. 就算对方没有表示歉意，我也会主动示好，当作问题不存在（如对自己说“算了”）。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q28" id="q28" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <h3 class="section-title">冲突后阶段</h3>
+
+                <div class="question">
+                    <div class="question-title">25. 冲突结束后，我会主动提出一起回顾这次矛盾，并思考是否可以改善我们之间的相处方式。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q25" id="q25" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="question">
-                <div class="question-title">29. 哪怕问题没有完全解决，我也不想再谈论这件事。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q29" id="q29" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="question">
+                    <div class="question-title">26. 即使我们已经解决了矛盾，我也会通过某些方式（如轻松的对话、约会、拥抱）来缓和可能残留的情绪。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q26" id="q26" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="question">
-                <div class="question-title">30. 争吵后，即便我心里还有不舒服的情绪，我通常会选择自己消化而不是再次和伴侣沟通。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q30" id="q30" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="question">
+                    <div class="question-title">27. 争吵后，我常常会反思是不是自己太挑剔，于是减少了对伴侣表达期待的次数。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q27" id="q27" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="question">
-                <div class="question-title">31. 冲突结束后，即使我意识到自己也有部分责任，我仍然认为对方应该承担主要责任并首先道歉。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q31" id="q31" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="question">
+                    <div class="question-title">28. 就算对方没有表示歉意，我也会主动示好，当作问题不存在（如对自己说"算了"）。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q28" id="q28" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="question">
-                <div class="question-title">32. 争吵过后，如果问题没有得到令我满意的解决（如对方没有认错或改变），我会继续施压或冷淡对待，直到对方按照我的期望做出回应，否则我不会真正放下这件事。<span class="required">*</span></div>
-                <div class="slider-container">
-                    <input type="range" class="slider" name="q32" id="q32" min="1" max="5" step="1" value="3" required>
-                    <div class="slider-value">3 - 有时</div>
-                    <div class="slider-labels">
-                        <span>1 - 从不</span>
-                        <span>2 - 偶尔</span>
-                        <span>3 - 有时</span>
-                        <span>4 - 经常</span>
-                        <span>5 - 总是</span>
+                <div class="question">
+                    <div class="question-title">29. 哪怕问题没有完全解决，我也不想再谈论这件事。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q29" id="q29" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="text-center mt-4">
-                <button type="submit" class="btn btn-primary">提交问卷</button>
-            </div>
-        </form>
+                <div class="question">
+                    <div class="question-title">30. 争吵后，即便我心里还有不舒服的情绪，我通常会选择自己消化而不是再次和伴侣沟通。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q30" id="q30" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">31. 冲突结束后，即使我意识到自己也有部分责任，我仍然认为对方应该承担主要责任并首先道歉。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q31" id="q31" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">32. 争吵过后，如果问题没有得到令我满意的解决（如对方没有认错或改变），我会继续施压或冷淡对待，直到对方按照我的期望做出回应，否则我不会真正放下这件事。<span class="required">*</span></div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" name="q32" id="q32" min="1" max="5" step="1" value="3" required>
+                        <div class="slider-value">3 - 有时</div>
+                        <div class="slider-labels">
+                            <span>1 - 从不</span>
+                            <span>2 - 偶尔</span>
+                            <span>3 - 有时</span>
+                            <span>4 - 经常</span>
+                            <span>5 - 总是</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary">提交问卷</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // 添加开始按钮的点击事件处理
+        document.getElementById('startButton').addEventListener('click', function() {
+            document.getElementById('instructionSection').style.display = 'none';
+            document.getElementById('surveyContent').style.display = 'block';
+        });
+
         // 定义维度题目映射
         const dimensionQuestions = {
             '协作': [9, 10, 17, 18, 25, 26],
@@ -748,7 +797,19 @@ e<!DOCTYPE html>
             URL.revokeObjectURL(url);
 
             // 显示结果
-            alert(`问卷提交成功！\n\n您的冲突处理方式主要倾向于：${highestDimension}风格\n\n各维度得分：\n协作：${dimensionScores['协作']}分\n迁就：${dimensionScores['迁就']}分\n回避：${dimensionScores['回避']}分\n竞争：${dimensionScores['竞争']}分`);
+            let resultMessage = `问卷提交成功！\n\n您的冲突处理方式主要倾向于：${highestDimension}风格\n\n各维度得分：\n协作：${dimensionScores['协作']}分\n迁就：${dimensionScores['迁就']}分\n回避：${dimensionScores['回避']}分\n竞争：${dimensionScores['竞争']}分`;
+
+            if (highestDimension === '协作') {
+                resultMessage += `\n\n1. 协作型 (Collaborating)\n您的核心特点：\n您高度重视自己的需求，也真诚关注伴侣的需求。您的目标不是谁输谁赢，而是找到让双方都感到满意、都能接受的解决方案。您倾向于坦诚地表达自己的想法和感受，同时也积极倾听和理解伴侣的视角。您相信沟通是解决问题的桥梁。您会主动寻求信息、探讨各种可能性，并愿意投入时间和精力，与伴侣共同寻找创造性的解决之道。您不仅在冲突中寻求解决，在冲突后也常常主动修复关系、总结经验，致力于关系的长期健康和成长。\n\n这种风格的优势：\n能深入解决问题，找到满足双方核心需求的方案。建立深厚的信任、尊重和亲密感。促进双方的个人成长和相互理解。通常与较高的关系满意度和稳定性相关。\n\n潜在挑战：\n可能需要较多时间和精力投入。如果伴侣不配合或缺乏沟通技巧，可能感到挫败。过度理性化有时可能忽略强烈的情感需求。\n\n给您的建议：\n您的风格是建立深度连接的宝贵财富，请继续坚持开放沟通和共同解决问题的努力。在理性探讨的同时，留意并适时回应双方（尤其是伴侣）的情绪状态。确认对方的感受（"我知道你现在很生气/难过…"）有时比立刻讲道理更重要。\n理解伴侣可能没有您那么熟练于协作，或者当下情境可能不适合深入讨论。有时需要给对方空间或采用更简化的方式。解决问题是双方的责任。警惕不要包揽所有沟通和解决的努力，确保伴侣也承担其应有的部分。`;
+            } else if (highestDimension === '迁就') {
+                resultMessage += `\n\n1. 迁就型 (Accommodating)\n您的核心特点：\n您非常看重关系的和谐与稳定，害怕冲突升级或破坏关系。为此，您常常将自己的需求、意见或感受放在次要位置，甚至选择压抑或放弃它们。您倾向于优先满足伴侣的需求，做出让步，同意对方的观点或方案，即使您内心并不完全赞同。您会尽量避免直接的争论或对抗，倾向于"息事宁人"，通过自己的妥协来平息冲突。您可能不太习惯直接表达不满或诉求，而是通过迁就行为来维系关系。\n\n这种风格的优势：\n能快速平息冲突，维持表面和谐。让伴侣感受到被照顾和重视。在小事或不重要问题上非常实用。\n\n潜在挑战：\n自身需求长期被忽视： 可能导致委屈、怨恨、不满累积，最终可能爆发或导致关系疏离。长期单方面迁就可能让伴侣习以为常，甚至"得寸进尺"，导致关系不平等。核心矛盾可能因回避而持续存在甚至恶化。过度迁就可能模糊自我边界，影响自我价值感。\n\n给您的建议：\n练习区分哪些需求对您来说是真正重要、不可轻易妥协的（如价值观、安全感、尊重），哪些是可以灵活处理的。学习用"我语句"（如"当…发生时，我感到…，我希望/需要…"）清晰、平静地表达自己的想法、感受和需求。从小事开始练习。\n明白迁就≠爱。学会在感到不舒服或被过度索取时说"不"。设立边界是自我关爱和维持健康关系的基础。\n真正的和谐建立在双方需求都能被看见和尊重的基础上，而非单方面的牺牲。勇于为真正的和谐发声。有意识地寻找在满足伴侣需求和满足自身需求之间的平衡点。问问自己："这次迁就，是否值得？是否可持续？"`;
+            } else if (highestDimension === '回避') {
+                resultMessage += `\n\n1. 回避型 (Avoiding)\n您的核心特点：\n当冲突出现或可能发生时，您的第一反应往往是回避。您可能推迟讨论、转移话题、离开现场、沉默不语或表现得好像问题不存在。您倾向于将不满、担忧或愤怒等情绪藏在心里，自己消化，而不是向伴侣表达。您可能觉得暂时离开冲突现场能让自己冷静下来，或者认为"时间能解决一切"。在冲突中，您对表达自身需求和积极回应对方需求的投入度都相对较低。\n\n这种风格的优势：\n在情绪非常激动时，暂时回避可以防止冲突升级失控，争取冷静时间。对于您认为不重要或无法改变的琐事，回避可以节省精力。\n\n潜在挑战：\n未解决的冲突和压抑的情绪会像滚雪球一样越积越大，最终可能导致更严重的爆发或关系冻结。伴侣可能将您的回避解读为冷漠、拒绝沟通、不重视关系或ta本人，导致误解加深和情感距离拉大。回避意味着放弃了共同面对和解决问题的机会。长期压抑情绪可能对您的心理健康（如焦虑、抑郁）和身体健康产生负面影响。\n\n给您的建议：\n如果感到情绪即将失控，可以主动告知伴侣您需要短暂冷静（如"我现在很生气/难过，需要10分钟冷静一下，我们待会再谈好吗？"），并约定回来讨论的时间。这与单纯逃避有本质区别。选择您感觉相对安全的情境或对象（可从信任的朋友开始练习），尝试表达一些不那么激烈的感受或想法。逐步建立表达的安全感和信心。\n如果选择暂时回避，事后（在冷静后）尝试向伴侣解释您当时回避的原因（如"我当时很害怕争吵失控"，"我不知道该说什么"），而不是让ta猜测。\n如果面对面冲突让您压力过大，可以尝试通过文字（短信、邮件）或在情绪平稳时约定一个专门的时间进行沟通。探索您回避的深层原因（如害怕冲突、沟通技巧不足、过往经历影响等）。考虑阅读相关书籍、参加工作坊或寻求心理咨询师的帮助，学习更有效的应对策略。`;
+            } else if (highestDimension === '竞争') {
+                resultMessage += `\n\n4. 竞争型 (Competing)\n您的核心特点：\n在冲突中，您高度关注实现自己的目标、需求和观点。您的首要目标是"赢"或让对方让步、接受您的方案。您会清晰地表达自己的立场，并努力说服、辩论甚至施加压力（如坚持争论、强调后果、冷淡对待）来维护它。您倾向于认为自己是对的，并希望对方承认这一点。在追求自身目标的过程中，您可能较少主动考虑或理解伴侣的需求、感受和观点。\n\n这种风格的优势：\n在需要快速决策或涉及核心原则/安全问题时，能有效保护自身利益。清晰地表达自己的立场和底线。在您确实正确且问题重要时，能推动问题按正确方向解决。\n\n潜在挑战：\n伴侣可能感到被压制、不被尊重、被忽视甚至受伤，长期如此会严重破坏信任和情感连接，导致伴侣疏离或反抗。您的强硬姿态可能激起伴侣更强烈的防御或反击，使冲突更加激烈和难以解决。专注于"赢"可能让您错过倾听伴侣观点、共同创造双赢解决方案的机会。即使您在具体冲突中"获胜"，也可能在关系满意度上"失败"。\n\n给您的建议：\n在表达自己之前，先真正努力去理解伴侣的观点、感受和需求是什么。尝试复述对方的话确认理解（"我听到你说…，是这样吗？"）。理解≠同意。您坚持的某个具体立场（如"必须今晚打扫卫生"）背后，往往隐藏着更深层的需求（如"我需要一个整洁的环境来放松"或"我需要看到你为共同生活负责"）。尝试识别并表达深层需求，而非仅仅坚持表面立场。寻找满足双方核心需求的方案。\n即使坚持自己的观点，也可以选择更尊重、非攻击性的表达方式。避免绝对化语言（"你总是…" "你从来不…"）、指责、讽刺或人身攻击。使用"我语句"表达感受和需求。在冲突中，有意识地寻找双方都认同的部分（共同目标、共同价值观），并探索是否有折中或部分满足双方需求的可能方案。\n在坚持己见前，问问自己："在这个问题上'赢'对我来说有多重要？为此可能损害关系的代价是否值得？"将关系本身视为需要共同维护的宝贵资产。`;
+            }
+
+            alert(resultMessage);
             this.reset();
         });
     </script>
